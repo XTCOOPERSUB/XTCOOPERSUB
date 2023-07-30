@@ -1,0 +1,69 @@
+```javascript
+// Trending topics and video performance data
+const trendingTopics = ["technology", "fashion", "gaming", "fitness", "cooking"];
+const videoPerformance = {
+  technology: ["Tech Gadgets", "Software Reviews"],
+  fashion: ["Summer Fashion Trends", "Makeup Hacks"],
+  gaming: ["Gameplay Walkthroughs", "Gaming News"],
+  fitness: ["Home Workouts", "Nutrition Tips"],
+  cooking: ["Quick and Easy Recipes", "Baking Ideas"]
+};
+
+// SafetyAI class
+class SafetyAI {
+  constructor() {
+    this.monitoredAIs = [];
+  }
+
+  // Method to register an AI to be monitored
+  registerAI(ai) {
+    this.monitoredAIs.push(ai);
+    console.log(`AI ${ai.name} has been registered.`);
+  }
+
+  // Method to monitor the behavior of all registered AIs
+  monitorAIs() {
+    for (let ai of this.monitoredAIs) {
+      if (ai.generateVideoIdea) {
+        const videoIdea = ai.generateVideoIdea();
+        console.log(`AI ${ai.name} generated video idea: "${videoIdea}"`);
+
+        // You can add safety checks or restrictions for the generated video ideas here
+        // For example, you can validate if the video idea matches an approved list of topics
+        
+      } else {
+        console.log(`AI ${ai.name} does not have the generateVideoIdea method.`);
+      }
+    }
+  }
+}
+
+// Create an instance of SafetyAI
+const safetyAI = new SafetyAI();
+
+// AI1
+const ai1 = {
+  name: "AI1",
+  generateVideoIdea: () => {
+    const randomTopic = trendingTopics[Math.floor(Math.random() * trendingTopics.length)];
+    const randomVideoIdea =
+      videoPerformance[randomTopic][Math.floor(Math.random() * videoPerformance[randomTopic].length)];
+    return `Create a video about ${randomVideoIdea} in the ${randomTopic} niche!`;
+  }
+};
+
+// AI2
+const ai2 = {
+  name: "AI2",
+  generateIdea: () => {
+    return "Unauthorized method!";
+  }
+};
+
+// Register the AIs to be monitored by the Safety AI
+safetyAI.registerAI(ai1);
+safetyAI.registerAI(ai2);
+
+// Monitor the AIs
+safetyAI.monitorAIs();
+```
